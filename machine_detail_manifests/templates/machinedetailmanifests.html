@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <legend><h5 class"text-uppercase">{{ plugin.title }}</h5></legend>
+      <dt>Manifests</dt>
+      <dd>
+        <table>
+          {% for item in Manifests %}
+          <tr>
+            <td>{{ item }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </dd>
+    </dl>
+  </div>
+</div>
