@@ -14,7 +14,7 @@ class Manifests(sal.plugin.Widget):
         context = self.super_get_context(queryset, **kwargs)
         manifest_plugin_results = queryset.filter(
             pluginscriptsubmission__plugin=self.name,
-            pluginscriptsubmission__pluginscriptrow__pluginscript_name="included_manifests")
+            pluginscriptsubmission__pluginscriptrow__pluginscript_name="Manifests")
         # Get a count of machines which haven't reported.
         unreported_count = queryset.count() - manifest_plugin_results.count()
 
