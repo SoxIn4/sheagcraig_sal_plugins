@@ -1,26 +1,12 @@
 #!/usr/local/sal/Python.framework/Versions/Current/bin/python3
-
-import os
-import plistlib
+import pathlib
 
 import sal
 
-from Foundation import CFPreferencesCopyAppValue
-
-
 def main():
-    bundle_id = "ManagedInstalls"
-    manifest =  CFPreferencesCopyAppValue('ClientIdentifier', bundle_id)
-    client_manifest_path = f'/Library/Managed Installs/manifests/{manifest}'
-    
-    if os.path.exists(client_manifest_path):
-        with open(client_manifest_path, 'rb') as cm:
-            client_manifest = plistlib.load(cm)
-    else:
-        client_manifest = {}
-
-    # Drop any blank entries and trim WS.
-    manifests = [m.strip() for m in client_manifest.get("included_manifests", []) if m]
+    manifests_dir = pathlib.Path('/Library/Managed Installs/manifests')
+    manifests = [item.stem for item in manifests_dir.rglob('*')
+                 if item.stem != 'SelfServeManifest' and item.is_file()]
     if not manifests:
         manifests = ["NO INCLUDED MANIFESTS"]
     sal.add_plugin_results('Manifests', {"included_manifests": "+".join(manifests)})
