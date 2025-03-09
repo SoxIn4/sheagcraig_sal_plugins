@@ -9,7 +9,7 @@ def main():
                  if item.stem != 'SelfServeManifest' and item.is_file()]
     if not manifests:
         manifests = ["NO INCLUDED MANIFESTS"]
-    sal.add_plugin_results('Manifests', {"included_manifests": "+".join(manifests)})
+    sal.add_plugin_results('Manifests', {"Manifests": "+".join(manifests)})
 
 
 if __name__ == "__main__":
